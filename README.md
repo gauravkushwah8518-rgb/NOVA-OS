@@ -113,18 +113,5 @@ NovaOS/
         └── about.js
 ```
 
-## Future Improvements
 
-* Drag-and-drop file organization on desktop
-* Window snapping (drag to edge to snap half-screen)
-* Window resize handles
-* Music player application
-* Calendar application
-* Weather widget (simulated)
-* Lock screen with PIN
-* Multi-workspace/virtual desktop support
-* File content editor within file manager
-* Export/import user data
-# NOVA--OS
-# NOVA--OS
-# NOVA-OS
+   # NOVA-OS
