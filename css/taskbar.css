@@ -1,0 +1,135 @@
+/* NovaOS Taskbar Styles */
+
+#taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: var(--taskbar-bg);
+    border-top: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    z-index: 10000;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.taskbar-left, .taskbar-center, .taskbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.taskbar-start-btn {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+    transition: var(--transition-smooth);
+}
+
+.taskbar-start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.9);
+}
+
+.taskbar-search-trigger {
+    height: 36px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: var(--transition-smooth);
+}
+
+.taskbar-search-trigger:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: var(--glass-border-hover);
+    color: var(--text-main);
+}
+
+.taskbar-apps {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.taskbar-app-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.workspace-switcher { display: flex; gap: 3px; margin-right: 6px; padding: 3px; border: 1px solid rgba(168,85,247,.18); border-radius: 9px; }
+.workspace-button { width: 23px; height: 23px; border-radius: 6px; color: var(--text-muted); font-size: .72rem; font-weight: 700; }
+.workspace-button:hover, .workspace-button.active { color: #fff; background: rgba(168,85,247,.42); box-shadow: 0 0 10px rgba(168,85,247,.3); }
+
+.taskbar-app-icon:hover {
+    background: rgba(168, 85, 247, 0.25);
+    border-color: var(--primary-neon);
+    transform: translateY(-2px);
+}
+
+.taskbar-app-icon.active {
+    background: rgba(168, 85, 247, 0.3);
+    border-color: var(--primary-neon);
+}
+
+.taskbar-app-icon.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    width: 16px;
+    height: 3px;
+    background: var(--primary-bright);
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--primary-neon);
+}
+
+.taskbar-tray {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.tray-clock {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.tray-icon {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.tray-icon:hover {
+    color: var(--primary-bright);
+}

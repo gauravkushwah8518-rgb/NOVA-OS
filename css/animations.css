@@ -1,0 +1,291 @@
+/* NovaOS Animations & Custom Cursor */
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), 0 0 45px rgba(124, 58, 237, 0.4); }
+}
+
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bootProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(1000%); }
+}
+
+/* Scroll reveal animations */
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes revealScale {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Notification slide in */
+@keyframes notifSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px) scale(0.9);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes notifSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(80px) scale(0.8);
+    }
+}
+
+/* Shimmer / scan effect for glass */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+/* Button ripple */
+@keyframes rippleExpand {
+    from {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Glow breathing for CTA */
+@keyframes glowBreathe {
+    0%, 100% { box-shadow: 0 4px 25px rgba(168, 85, 247, 0.5); }
+    50% { box-shadow: 0 4px 40px rgba(168, 85, 247, 0.9), 0 0 60px rgba(124, 58, 237, 0.3); }
+}
+
+/* Desktop icon appear stagger */
+@keyframes iconAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Navbar gradient border sweep */
+@keyframes borderSweep {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Typewriter cursor blink */
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Utility animation classes */
+.animate-pulse-glow {
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+.animate-float {
+    animation: floatAnim 6s infinite ease-in-out;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Scroll reveal — hidden by default, shown by IntersectionObserver */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(6px);
+    transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease;
+}
+
+[data-animate].revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Stagger children inside revealed parents */
+[data-animate].revealed .feature-card,
+[data-animate].revealed .showcase-card,
+[data-animate].revealed .status-row {
+    animation: revealUp 0.6s ease forwards;
+    opacity: 0;
+}
+[data-animate].revealed .feature-card:nth-child(1),
+[data-animate].revealed .showcase-card:nth-child(1),
+[data-animate].revealed .status-row:nth-child(1) { animation-delay: 0.05s; }
+[data-animate].revealed .feature-card:nth-child(2),
+[data-animate].revealed .showcase-card:nth-child(2),
+[data-animate].revealed .status-row:nth-child(2) { animation-delay: 0.12s; }
+[data-animate].revealed .feature-card:nth-child(3),
+[data-animate].revealed .showcase-card:nth-child(3),
+[data-animate].revealed .status-row:nth-child(3) { animation-delay: 0.19s; }
+[data-animate].revealed .feature-card:nth-child(4),
+[data-animate].revealed .showcase-card:nth-child(4),
+[data-animate].revealed .status-row:nth-child(4) { animation-delay: 0.26s; }
+[data-animate].revealed .feature-card:nth-child(5),
+[data-animate].revealed .showcase-card:nth-child(5) { animation-delay: 0.33s; }
+[data-animate].revealed .feature-card:nth-child(6),
+[data-animate].revealed .showcase-card:nth-child(6) { animation-delay: 0.40s; }
+
+/* Ripple effect container */
+.ripple-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-container .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+    animation: rippleExpand 0.7s ease-out forwards;
+}
+
+/* Custom Cursor */
+body, button, a, input, [role="button"] {
+    cursor: default;
+}
+
+.custom-cursor {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    transition: transform 0.1s ease-out;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #c084fc;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.cursor-ring {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(168, 85, 247, 0.6);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s;
+    background: rgba(168, 85, 247, 0.05);
+    backdrop-filter: blur(1px);
+}
+
+body.cursor-hover .cursor-dot {
+    width: 14px;
+    height: 14px;
+    background-color: #e9d5ff;
+}
+
+body.cursor-hover .cursor-ring {
+    width: 56px;
+    height: 56px;
+    border-color: #c084fc;
+    background: rgba(168, 85, 247, 0.15);
+}
+
+/* Cursor trail particles */
+.cursor-particle {
+    position: fixed;
+    pointer-events: none;
+    width: 4px;
+    height: 4px;
+    background: #a855f7;
+    border-radius: 50%;
+    z-index: 99998;
+    opacity: 0.7;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+@media (pointer: coarse) {
+    .custom-cursor,
+    .cursor-particle {
+        display: none !important;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    [data-animate] {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+    }
+    .custom-cursor {
+        display: none !important;
+    }
+}

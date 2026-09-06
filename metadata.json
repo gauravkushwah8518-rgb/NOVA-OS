@@ -1,0 +1,6 @@
+{
+  "name": "NovaOS",
+  "description": "Your OS. Reimagined. A futuristic browser-based virtual operating system with glassmorphism UI, interactive windows, and powerful apps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NovaOS — Your OS. Reimagined.</title>
+    <meta name="description" content="NovaOS brings a powerful, beautiful and intuitive desktop experience directly to your browser." />
+    <meta property="og:title" content="NovaOS — Your OS. Reimagined." />
+    <meta property="og:description" content="A futuristic browser-based virtual operating system with glassmorphism UI and interactive apps." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- NovaOS Modular CSS -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/landing.css">
+    <link rel="stylesheet" href="./css/desktop.css">
+    <link rel="stylesheet" href="./css/windows.css">
+    <link rel="stylesheet" href="./css/taskbar.css">
+    <link rel="stylesheet" href="./css/start-menu.css">
+    <link rel="stylesheet" href="./css/apps.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+      <div class="cursor-dot"></div>
+      <div class="cursor-ring"></div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="notification-container"></div>
+
+    <!-- Boot Screen -->
+    <div id="boot-screen">
+      <div class="boot-content">
+        <div class="boot-logo">NOVAOS</div>
+        <div id="boot-log-text" class="boot-log">INITIALIZING SYSTEM KERNEL...</div>
+        <div class="boot-progress-bar">
+          <div id="boot-progress-fill" class="boot-progress-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landing-page">
+      <!-- Ambient glow orbs (pure CSS, no Tailwind) -->
+      <div class="glow-orb glow-orb--1"></div>
+      <div class="glow-orb glow-orb--2"></div>
+      <div class="glow-orb glow-orb--3"></div>
+      <canvas id="particle-canvas"></canvas>
+
+      <!-- Navbar -->
+      <nav class="landing-navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-brand">
+          <div class="nav-logo-icon">N</div>
+          <span class="nav-title">NovaOS</span>
+        </div>
+        <div class="nav-links">
+          <a href="#hero" class="nav-link active">Home</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#apps" class="nav-link">Apps</a>
+          <a href="#status" class="nav-link">System</a>
+          <a href="README.md" target="_blank" class="nav-link">Documentation</a>
+        </div>
+        <button class="nav-cta ripple-container" id="nav-launch-btn">Launch NovaOS</button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+      <!-- Mobile Nav Drawer -->
+      <div class="mobile-nav-drawer" id="mobile-drawer">
+        <a href="#hero" class="mobile-nav-link">Home</a>
+        <a href="#features" class="mobile-nav-link">Features</a>
+        <a href="#apps" class="mobile-nav-link">Apps</a>
+        <a href="#status" class="mobile-nav-link">System</a>
+        <a href="README.md" target="_blank" class="mobile-nav-link">Documentation</a>
+        <button class="btn-primary ripple-container" id="mobile-launch-btn" style="width: 100%; justify-content: center;">Launch NovaOS</button>
+      </div>
+
+      <!-- Hero Section -->
+      <section class="hero-section" id="hero">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="stat-dot"></span>
+            Next-Gen Browser OS v2.4
+          </div>
+          <h1 class="hero-title">
+            Your OS.<br>
+            <span class="gradient-text">Reimagined.</span>
+          </h1>
+          <p class="hero-subtitle">
+            NovaOS brings a powerful, beautiful and intuitive desktop operating system directly to your browser with zero installation.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn-primary ripple-container" id="hero-launch-btn">
+              Launch NovaOS ⚡
+            </button>
+            <a href="#features" class="btn-secondary">Explore Features</a>
+          </div>
+          <div class="hero-stats-row">
+            <div class="stat-item"><span class="stat-dot"></span>Web Based</div>
+            <div class="stat-item"><span class="stat-dot"></span>No Installation</div>
+            <div class="stat-item"><span class="stat-dot"></span>Your Data, Your Control</div>
+          </div>
+        </div>
+
+        <div class="hero-preview-container">
+          <div class="hero-os-preview" id="hero-preview-box">
+            <div class="preview-topbar">
+              <div class="preview-window-dots">
+                <div class="preview-dot red"></div>
+                <div class="preview-dot yellow"></div>
+                <div class="preview-dot green"></div>
+              </div>
+              <span class="preview-title">NovaOS Desktop Environment</span>
+              <div style="width: 40px;"></div>
+            </div>
+            <div class="preview-body">
+              <div class="preview-mock-window preview-mock-terminal">
+                <div style="margin-bottom: 4px; color: #a855f7; font-weight: bold;">root@novaos:~#</div>
+                <div>> init system... OK</div>
+                <div>> loading modules... READY</div>
+                <div style="color: #34d399;">> NovaOS v2.4 Online.</div>
+              </div>
+              <div class="preview-mock-window preview-mock-notes">
+                <div style="font-weight: bold; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2px;">Ideas.txt</div>
+                <div>Build futuristic virtual OS with glassmorphism and purple glow.</div>
+              </div>
+              <div class="preview-mock-window preview-mock-calc">
+                <div style="background: rgba(0,0,0,0.5); padding: 4px 8px; text-align: right; font-family: monospace; font-weight: bold; color: #c084fc; margin-bottom: 8px; border-radius: 4px;">42.00</div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; font-size: 0.75rem; text-align: center;">
+                  <div style="background: rgba(255,255,255,0.1); padding: 4px; border-radius: 4px;">7</div>
+                  <div style="background: rgba(255,255,255,0.1); padding: 4px; border-radius: 4px;">8</div>
+                  <div style="background: rgba(255,255,255,0.1); padding: 4px; border-radius: 4px;">9</div>
+                  <div style="background: rgba(168,85,247,0.3); padding: 4px; border-radius: 4px;">/</div>
+                </div>
+              </div>
+              <div class="preview-mock-taskbar">
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <div style="width: 20px; height: 20px; background: #a855f7; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold;">N</div>
+                  <div style="width: 16px; height: 16px; background: rgba(255,255,255,0.2); border-radius: 4px;"></div>
+                  <div style="width: 16px; height: 16px; background: rgba(255,255,255,0.2); border-radius: 4px;"></div>
+                </div>
+                <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 600;">12:45 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="section-container" id="features" data-animate>
+        <div class="section-header">
+          <span class="section-tag">Capabilities</span>
+          <h2 class="section-title">Engineered for the Future</h2>
+          <p class="section-desc">Experience unmatched fluidity, multi-tasking power, and privacy with browser-native architecture.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">🖥️</div>
+            <h3 class="feature-title">Modern Interface</h3>
+            <p class="feature-text">Immersive glassmorphism desktop environment with fully customizable wallpapers, dark neon themes, and fluid layouts.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">🪟</div>
+            <h3 class="feature-title">Multi-Tasking</h3>
+            <p class="feature-text">Open, drag, minimize, maximize, and stack multiple applications simultaneously with robust Z-index management.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">🔒</div>
+            <h3 class="feature-title">Private & Local</h3>
+            <p class="feature-text">All files, notes, and user configurations are securely stored locally inside your browser via Web Storage API.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">⚡</div>
+            <h3 class="feature-title">Fast & Lightweight</h3>
+            <p class="feature-text">Zero backend servers or bloated frameworks. Built with pure vanilla JavaScript and CSS for lightning-fast performance.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">🛠️</div>
+            <h3 class="feature-title">Powerful Apps</h3>
+            <p class="feature-text">Comes pre-equipped with a virtual File Manager, Notes, Terminal shell, Calculator, Paint studio, and Settings.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-box">🎨</div>
+            <h3 class="feature-title">Customization</h3>
+            <p class="feature-text">Tailor your NovaOS experience with adjustable accents, custom wallpapers, and system preferences.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- App Showcase Section -->
+      <section class="section-container" id="apps" data-animate>
+        <div class="section-header">
+          <span class="section-tag">Ecosystem</span>
+          <h2 class="section-title">Pre-Installed Applications</h2>
+          <p class="section-desc">Click any app demo below to instantly launch it inside NovaOS.</p>
+        </div>
+        <div class="showcase-slider">
+          <div class="showcase-card">
+            <div>
+              <div class="showcase-header">
+                <div class="showcase-icon">📁</div>
+                <h3 class="showcase-name">Files</h3>
+              </div>
+              <p class="showcase-desc">Virtual filesystem supporting folders, text documents, file creation, renaming, and organization.</p>
+            </div>
+            <button class="showcase-btn ripple-container" data-app="files">Open Demo 🚀</button>
+          </div>
+          <div class="showcase-card">
+            <div>
+              <div class="showcase-header">
+                <div class="showcase-icon">📝</div>
+                <h3 class="showcase-name">Notes</h3>
+              </div>
+              <p class="showcase-desc">Sticky notes application with auto-saving, color tags, search, and pinning capabilities.</p>
+            </div>
+            <button class="showcase-btn ripple-container" data-app="notes">Open Demo 🚀</button>
+          </div>
+          <div class="showcase-card">
+            <div>
+              <div class="showcase-header">
+                <div class="showcase-icon">🖥️</div>
+                <h3 class="showcase-name">Terminal</h3>
+              </div>
+              <p class="showcase-desc">Interactive shell supporting commands like help, ls, mkdir, neofetch, clear, date, and history.</p>
+            </div>
+            <button class="showcase-btn ripple-container" data-app="terminal">Open Demo 🚀</button>
+          </div>
+          <div class="showcase-card">
+            <div>
+              <div class="showcase-header">
+                <div class="showcase-icon">🧮</div>
+                <h3 class="showcase-name">Calculator</h3>
+              </div>
+              <p class="showcase-desc">Complete arithmetic calculator supporting keyboard input, decimals, and percentage calculations.</p>
+            </div>
+            <button class="showcase-btn ripple-container" data-app="calculator">Open Demo 🚀</button>
+          </div>
+          <div class="showcase-card">
+            <div>
+              <div class="showcase-header">
+                <div class="showcase-icon">🎨</div>
+                <h3 class="showcase-name">Paint</h3>
+              </div>
+              <p class="showcase-desc">HTML5 Canvas drawing studio with pencil, eraser, brush sizing, undo/redo and color picker.</p>
+            </div>
+            <button class="showcase-btn ripple-container" data-app="paint">Open Demo 🚀</button>
+          </div>
+          <div class="showcase-card">
+            <div>
+              <div class="showcase-header">
+                <div class="showcase-icon">⚙️</div>
+                <h3 class="showcase-name">Settings</h3>
+              </div>
+              <p class="showcase-desc">System preferences dashboard to change wallpapers, themes, and check system info.</p>
+            </div>
+            <button class="showcase-btn ripple-container" data-app="settings">Open Demo 🚀</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- System Status Section -->
+      <section class="section-container" id="status" data-animate>
+        <div class="section-header">
+          <span class="section-tag">Diagnostics</span>
+          <h2 class="section-title">Virtual System Metrics</h2>
+          <p class="section-desc">Real-time simulated telemetry for the NovaOS runtime container.</p>
+        </div>
+        <div class="status-container">
+          <div class="status-grid">
+            <div class="status-row">
+              <span class="status-label">CPU LOAD</span>
+              <div class="status-bar-wrapper">
+                <div class="status-bar-fill" id="stat-cpu" style="width: 32%;"></div>
+              </div>
+              <span class="status-value" id="val-cpu">32%</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">MEMORY</span>
+              <div class="status-bar-wrapper">
+                <div class="status-bar-fill" id="stat-mem" style="width: 58%;"></div>
+              </div>
+              <span class="status-value" id="val-mem">58%</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">STORAGE</span>
+              <div class="status-bar-wrapper">
+                <div class="status-bar-fill" id="stat-storage" style="width: 24%;"></div>
+              </div>
+              <span class="status-value" id="val-storage">24%</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">NETWORK</span>
+              <div class="status-bar-wrapper">
+                <div class="status-bar-fill" id="stat-net" style="width: 85%;"></div>
+              </div>
+              <span class="status-value" id="val-net">1 Gbps</span>
+            </div>
+          </div>
+          <div class="status-badge-row">
+            <div class="sys-badge">● ONLINE</div>
+            <div class="sys-badge">● STABLE</div>
+            <div class="sys-badge">● SECURE STORAGE</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="cta-section" data-animate>
+        <h2 class="cta-title">Ready to experience the future?</h2>
+        <button class="cta-btn ripple-container" id="cta-boot-btn">
+          BOOT NOVAOS ⚡
+        </button>
+      </section>
+    </div>
+
+    <!-- Actual Virtual OS Desktop Environment -->
+    <div id="desktop-env">
+      <!-- Desktop Icons -->
+      <div class="desktop-grid" id="desktop-icons">
+        <div class="desktop-icon" data-app="files">
+          <div class="desktop-icon-img">📁</div>
+          <span class="desktop-icon-label">Files</span>
+        </div>
+        <div class="desktop-icon" data-app="notes">
+          <div class="desktop-icon-img">📝</div>
+          <span class="desktop-icon-label">Notes</span>
+        </div>
+        <div class="desktop-icon" data-app="calculator">
+          <div class="desktop-icon-img">🧮</div>
+          <span class="desktop-icon-label">Calculator</span>
+        </div>
+        <div class="desktop-icon" data-app="terminal">
+          <div class="desktop-icon-img">🖥️</div>
+          <span class="desktop-icon-label">Terminal</span>
+        </div>
+        <div class="desktop-icon" data-app="paint">
+          <div class="desktop-icon-img">🎨</div>
+          <span class="desktop-icon-label">Paint</span>
+        </div>
+        <div class="desktop-icon" data-app="settings">
+          <div class="desktop-icon-img">⚙️</div>
+          <span class="desktop-icon-label">Settings</span>
+        </div>
+        <div class="desktop-icon" data-app="clock">
+          <div class="desktop-icon-img">⏰</div>
+          <span class="desktop-icon-label">Clock</span>
+        </div>
+        <div class="desktop-icon" data-app="about">
+          <div class="desktop-icon-img">ℹ️</div>
+          <span class="desktop-icon-label">About</span>
+        </div>
+        <div class="desktop-icon" data-app="music">
+          <div class="desktop-icon-img">🎵</div>
+          <span class="desktop-icon-label">Music</span>
+        </div>
+        <div class="desktop-icon" data-app="calendar">
+          <div class="desktop-icon-img">📅</div>
+          <span class="desktop-icon-label">Calendar</span>
+        </div>
+        <div class="desktop-icon" data-app="weather">
+          <div class="desktop-icon-img">☀️</div>
+          <span class="desktop-icon-label">Weather</span>
+        </div>
+      </div>
+
+      <!-- Context Menu -->
+      <div class="context-menu" id="desktop-context-menu">
+        <div class="context-item" id="ctx-new-folder">📁 New Folder</div>
+        <div class="context-item" id="ctx-new-file">📄 New Text File</div>
+        <div class="context-divider"></div>
+        <div class="context-item" id="ctx-refresh">🔄 Refresh Desktop</div>
+        <div class="context-item" id="ctx-wallpaper">🎨 Change Wallpaper</div>
+        <div class="context-divider"></div>
+        <div class="context-item" id="ctx-settings">⚙️ Display Settings</div>
+      </div>
+
+      <!-- Start Menu -->
+      <div id="start-menu">
+        <div class="start-header">
+          <span class="start-brand">NovaOS</span>
+        </div>
+        <input type="text" class="start-search-bar" id="start-search" placeholder="Search apps, files, settings...">
+        <div class="start-section-title">Pinned Applications</div>
+        <div class="start-apps-grid" id="start-apps-list">
+          <!-- Populated by JS -->
+        </div>
+        <div class="start-footer">
+          <div class="start-user-info">
+            <div class="start-user-avatar">N</div>
+            <span class="start-user-name">Nova User</span>
+          </div>
+          <div class="start-system-actions">
+            <button class="start-power-btn lock" id="start-lock-btn" title="Lock NovaOS" aria-label="Lock NovaOS">🔒</button>
+            <button class="start-power-btn" id="start-shutdown-btn" title="Shut down NovaOS" aria-label="Shut down NovaOS">⏻</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Taskbar -->
+      <nav id="taskbar">
+        <div class="taskbar-left">
+          <button class="taskbar-start-btn" id="taskbar-start-btn" title="Start Menu">N</button>
+          <div class="taskbar-search-trigger" id="taskbar-search-trigger">
+            <span>🔍</span>
+            <span style="font-size: 0.8rem;">Type here to search</span>
+          </div>
+        </div>
+        <div class="taskbar-center">
+          <div class="taskbar-apps" id="taskbar-apps">
+            <!-- Open app icons will appear here -->
+          </div>
+        </div>
+        <div class="taskbar-right">
+          <div class="workspace-switcher" id="workspace-switcher" aria-label="Virtual workspaces"></div>
+          <div class="taskbar-tray">
+            <span class="tray-icon" title="Network Status">📶</span>
+            <span class="tray-icon" title="Audio Volume">🔊</span>
+            <span class="tray-icon" title="Battery">🔋</span>
+            <span class="tray-clock" id="taskbar-clock">12:00 PM</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Modular Vanilla JS Core & Apps -->
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

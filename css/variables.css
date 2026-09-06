@@ -1,0 +1,58 @@
+/* NovaOS Design System Variables - Frosted Glass Theme */
+:root {
+    --bg-deep: #05010a;
+    --bg-surface: #0e071b;
+    --bg-surface-glass: rgba(14, 7, 27, 0.7);
+    --bg-card: rgba(20, 10, 38, 0.6);
+    --bg-card-hover: rgba(35, 18, 65, 0.75);
+    
+    --primary-neon: #a855f7;
+    --primary-glow: rgba(168, 85, 247, 0.5);
+    --primary-bright: #c084fc;
+    --secondary-violet: #7c3aed;
+    --accent-lavender: #e9d5ff;
+    
+    --text-main: #ffffff;
+    --text-muted: #9ca3af;
+    --text-dim: #6b7280;
+    
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border-hover: rgba(168, 85, 247, 0.4);
+    --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    
+    /* Enhanced glass tokens */
+    --glass-navbar: rgba(8, 4, 16, 0.35);
+    --glass-navbar-scrolled: rgba(8, 4, 16, 0.82);
+    --glass-navbar-border: rgba(168, 85, 247, 0.12);
+    --glass-navbar-border-scrolled: rgba(168, 85, 247, 0.45);
+    --glass-glow-soft: 0 0 40px rgba(168, 85, 247, 0.15);
+    --glass-glow-strong: 0 0 60px rgba(168, 85, 247, 0.35);
+    
+    --window-header: rgba(14, 7, 27, 0.9);
+    --taskbar-bg: rgba(5, 1, 10, 0.85);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Animation durations */
+    --anim-fast: 0.2s;
+    --anim-normal: 0.4s;
+    --anim-slow: 0.8s;
+}
+
+[data-theme="light"] {
+    --bg-deep: #f3e8ff;
+    --bg-surface: #ffffff;
+    --bg-surface-glass: rgba(255, 255, 255, 0.8);
+    --bg-card: rgba(243, 232, 255, 0.7);
+    --bg-card-hover: rgba(233, 213, 255, 0.9);
+    --text-main: #1e1b4b;
+    --text-muted: #6b21a8;
+    --text-dim: #9333ea;
+    --glass-border: rgba(147, 51, 234, 0.3);
+    --glass-navbar: rgba(255, 255, 255, 0.5);
+    --glass-navbar-scrolled: rgba(255, 255, 255, 0.85);
+    --window-header: rgba(243, 232, 255, 0.9);
+    --taskbar-bg: rgba(255, 255, 255, 0.85);
+}

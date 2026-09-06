@@ -1,0 +1,171 @@
+/* NovaOS Start Menu Styles */
+
+#start-menu {
+    position: fixed;
+    bottom: 56px;
+    left: 12px;
+    width: 380px;
+    height: 520px;
+    background: rgba(14, 8, 28, 0.92);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.25);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 10001;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-bounce);
+}
+
+#start-menu.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.start-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.start-brand {
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.start-search-bar {
+    width: 100%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-radius: 12px;
+    padding: 0 16px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    transition: var(--transition-smooth);
+}
+
+.start-search-bar:focus {
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.start-section-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.start-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    overflow-y: auto;
+    max-height: 320px;
+    padding-right: 4px;
+}
+
+.start-app-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 6px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.start-app-item:hover {
+    background: rgba(168, 85, 247, 0.2);
+    transform: translateY(-2px);
+}
+
+.start-app-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(124, 58, 237, 0.3));
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.start-app-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+}
+
+.start-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(168, 85, 247, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.start-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.start-user-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.start-user-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.start-power-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+    transition: var(--transition-smooth);
+}
+
+.start-system-actions { display: flex; gap: 8px; }
+.start-power-btn.lock { color: var(--accent-lavender); background: rgba(168,85,247,.16); border-color: rgba(168,85,247,.3); }
+
+.start-power-btn:hover {
+    background: #ef4444;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
