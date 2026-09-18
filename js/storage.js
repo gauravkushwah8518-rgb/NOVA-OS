@@ -31,7 +31,7 @@ export const Storage = {
 };
 
 // All data stays in the browser. These helpers intentionally only touch NovaOS keys.
-export const BACKUP_KEYS = ['settings', 'filesystem', 'notes', 'desktopPositions', 'calendarEvents', 'workspaceState', 'musicPrefs', 'weatherPrefs', 'lockConfig'];
+export const BACKUP_KEYS = ['settings', 'filesystem', 'notes', 'desktopPositions', 'calendarEvents', 'workspaceState', 'musicPrefs', 'weatherPrefs', 'lockConfig', 'customWallpaper'];
 
 export function createBackup() {
     const data = {};

@@ -1,14 +1,15 @@
 /* NovaOS Master Entry Point */
 
-import { initLanding } from './landing.js';
-import { initDesktop } from './desktop.js';
-import { initTaskbar } from './taskbar.js';
-import { initStartMenu, launchApp } from './start-menu.js?v=5';
-import { closeAllWindows } from './window-manager.js';
-import { showNotification } from './notifications.js';
-import { Storage } from './storage.js';
-import { initWorkspaces } from './workspaces.js';
-import { initLockScreen } from './lock-screen.js';
+import { initLanding } from './landing.js?v=7';
+import { initDesktop } from './desktop.js?v=7';
+import { initTaskbar } from './taskbar.js?v=7';
+import { initStartMenu, launchApp } from './start-menu.js?v=7';
+import { closeAllWindows } from './window-manager.js?v=7';
+import { showNotification } from './notifications.js?v=7';
+import { Storage } from './storage.js?v=7';
+import { initWorkspaces } from './workspaces.js?v=7';
+import { initLockScreen } from './lock-screen.js?v=7';
+import { applyWallpaper } from './apps/settings.js?v=7';
 
 document.addEventListener('DOMContentLoaded', () => {
     const landingPage = document.getElementById('landing-page');
@@ -24,15 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (landingPage) landingPage.style.display = 'none';
         if (desktopEnv) desktopEnv.classList.add('active');
 
-        // Apply wallpaper
-        if (desktopEnv) {
-            const wp = settings.wallpaper || 'default';
-            if (wp === 'purple') {
-                desktopEnv.style.backgroundImage = 'radial-gradient(circle at 50% 30%, #581c87 0%, #0f0728 80%)';
-            } else if (wp === 'midnight') {
-                desktopEnv.style.backgroundImage = 'radial-gradient(circle at 50% 30%, #3b0764 0%, #030108 80%)';
-            }
-        }
+        // Apply wallpaper (presets + custom upload)
+        if (desktopEnv) applyWallpaper(settings.wallpaper || 'default');
 
         initTaskbar();
         initDesktop();

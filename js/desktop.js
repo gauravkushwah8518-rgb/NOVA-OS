@@ -1,7 +1,7 @@
 /* NovaOS desktop icon selection, opening, and persisted drag positioning. */
-import { launchApp } from './start-menu.js';
-import { initContextMenu } from './context-menu.js';
-import { Storage } from './storage.js';
+import { launchApp } from './start-menu.js?v=7';
+import { initContextMenu } from './context-menu.js?v=7';
+import { Storage } from './storage.js?v=7';
 
 const GRID = 112;
 const PADDING = 18;

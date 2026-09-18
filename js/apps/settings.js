@@ -1,7 +1,36 @@
 /* NovaOS Settings extends the existing local preferences with safe backup and lock controls. */
-import { Storage, createBackup, restoreBackup, validateBackup } from '../storage.js';
-import { showNotification } from '../notifications.js';
-import { lockNovaOS } from '../lock-screen.js';
+import { Storage, createBackup, restoreBackup, validateBackup } from '../storage.js?v=7';
+import { showNotification } from '../notifications.js?v=7';
+import { lockNovaOS } from '../lock-screen.js?v=7';
+
+export const WALLPAPERS = {
+    default: 'radial-gradient(circle at 50% 30%, #1e1035 0%, #080410 80%)',
+    purple: 'radial-gradient(circle at 50% 30%, #581c87 0%, #0f0728 80%)',
+    midnight: 'radial-gradient(circle at 50% 30%, #3b0764 0%, #030108 80%)',
+    ocean: 'radial-gradient(circle at 50% 30%, #0c4a6e 0%, #020617 80%)',
+    sunset: 'radial-gradient(circle at 50% 30%, #831843 0%, #0c0209 80%)',
+    forest: 'radial-gradient(circle at 50% 30%, #14532d 0%, #02120a 80%)'
+};
+
+function fileToWallpaperDataUrl(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('read failed'));
+        reader.onload = () => {
+            const img = new Image();
+            img.onerror = () => reject(new Error('decode failed'));
+            img.onload = () => {
+                const scale = Math.min(1, 1920 / img.width);
+                const canvas = document.createElement('canvas');
+                canvas.width = Math.round(img.width * scale); canvas.height = Math.round(img.height * scale);
+                canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                resolve(canvas.toDataURL('image/jpeg', 0.82));
+            };
+            img.src = String(reader.result);
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
 export function renderSettingsApp(container) {
     let settings = Storage.get('settings', { theme: 'dark', wallpaper: 'default' });
@@ -11,9 +40,28 @@ export function renderSettingsApp(container) {
     function renderTab(tab) {
         tabs.forEach(button => button.classList.toggle('active', button.dataset.tab === tab));
         if (tab === 'appearance') {
-            pane.innerHTML = `<div class="setting-group"><span class="setting-label">Theme Mode</span><div class="setting-options"><button class="fm-btn theme-btn ${settings.theme === 'dark' ? 'active' : ''}" data-theme="dark">Dark Neon</button><button class="fm-btn theme-btn ${settings.theme === 'light' ? 'active' : ''}" data-theme="light">Light Lavender</button></div></div><div class="setting-group"><span class="setting-label">Desktop Wallpaper</span><div class="setting-options">${['default','purple','midnight'].map(wallpaper => `<button class="wallpaper-option ${settings.wallpaper === wallpaper ? 'active' : ''}" data-wp="${wallpaper}" aria-label="${wallpaper} wallpaper" style="background:${wallpaper === 'purple' ? 'radial-gradient(circle,#581c87,#0f0728)' : wallpaper === 'midnight' ? 'radial-gradient(circle,#3b0764,#030108)' : 'radial-gradient(circle,#2e1065,#080410)'}"></button>`).join('')}</div></div>`;
+            const customSet = !!Storage.get('customWallpaper', null);
+            const presetButtons = Object.keys(WALLPAPERS).map(name => `<button class="wallpaper-option ${settings.wallpaper === name ? 'active' : ''}" data-wp="${name}" aria-label="${name} wallpaper" style="background:${WALLPAPERS[name]}"></button>`).join('');
+            const customThumb = customSet ? `<button class="wallpaper-option ${settings.wallpaper === 'custom' ? 'active' : ''}" data-wp="custom" aria-label="Custom wallpaper" style="background-image:url('${Storage.get('customWallpaper')}')"></button>` : '';
+            pane.innerHTML = `<div class="setting-group"><span class="setting-label">Theme Mode</span><div class="setting-options"><button class="fm-btn theme-btn ${settings.theme === 'dark' ? 'active' : ''}" data-theme="dark">Dark Neon</button><button class="fm-btn theme-btn ${settings.theme === 'light' ? 'active' : ''}" data-theme="light">Light Lavender</button></div></div><div class="setting-group"><span class="setting-label">Desktop Wallpaper</span><div class="setting-options">${presetButtons}${customThumb}</div><div class="wallpaper-upload-row"><button class="fm-btn" id="wallpaper-upload-btn">Upload image…</button><input id="wallpaper-upload-input" type="file" accept="image/*" hidden>${customSet ? '<button class="fm-btn" id="wallpaper-remove-btn">Remove custom</button>' : ''}<span class="wallpaper-upload-hint">JPG or PNG · saved locally, never uploaded</span></div></div>`;
             pane.querySelectorAll('.theme-btn').forEach(button => button.addEventListener('click', () => { settings.theme = button.dataset.theme; Storage.set('settings', settings); document.documentElement.toggleAttribute('data-theme', settings.theme === 'light'); if (settings.theme === 'light') document.documentElement.setAttribute('data-theme', 'light'); showNotification('Settings', 'Theme updated.'); renderTab('appearance'); }));
             pane.querySelectorAll('.wallpaper-option').forEach(button => button.addEventListener('click', () => { settings.wallpaper = button.dataset.wp; Storage.set('settings', settings); applyWallpaper(settings.wallpaper); showNotification('Settings', 'Wallpaper updated.'); renderTab('appearance'); }));
+            const uploadInput = pane.querySelector('#wallpaper-upload-input');
+            pane.querySelector('#wallpaper-upload-btn')?.addEventListener('click', () => uploadInput?.click());
+            uploadInput?.addEventListener('change', async () => {
+                const file = uploadInput.files?.[0];
+                if (!file) return;
+                if (!file.type.startsWith('image/')) { showNotification('Settings', 'Choose an image file (JPG or PNG).'); return; }
+                if (file.size > 8 * 1024 * 1024) { showNotification('Settings', 'Image too large — pick one under 8 MB.'); return; }
+                try {
+                    Storage.set('customWallpaper', await fileToWallpaperDataUrl(file));
+                    settings.wallpaper = 'custom'; Storage.set('settings', settings);
+                    applyWallpaper('custom');
+                    showNotification('Settings', 'Custom wallpaper applied.');
+                    renderTab('appearance');
+                } catch (_) { showNotification('Settings', 'Could not process that image.'); }
+            });
+            pane.querySelector('#wallpaper-remove-btn')?.addEventListener('click', () => { Storage.remove('customWallpaper'); settings.wallpaper = 'default'; Storage.set('settings', settings); applyWallpaper('default'); showNotification('Settings', 'Custom wallpaper removed.'); renderTab('appearance'); });
         } else if (tab === 'desktop') {
             pane.innerHTML = `<div class="setting-group"><span class="setting-label">Desktop icons</span><p class="setting-copy">Drag icons to rearrange them. Positions are automatically saved locally and restored after a refresh.</p><button class="fm-btn" id="reset-icon-layout">Reset icon layout</button></div><div class="setting-group"><span class="setting-label">Virtual workspaces</span><p class="setting-copy">Four workspace buttons are available in the taskbar. Windows stay assigned to the workspace where they were opened.</p></div>`;
             pane.querySelector('#reset-icon-layout')?.addEventListener('click', () => { Storage.remove('desktopPositions'); showNotification('Settings', 'Icon layout reset. Refresh NovaOS to apply it.'); });
@@ -32,6 +80,15 @@ export function renderSettingsApp(container) {
     tabs.forEach(button => button.addEventListener('click', () => renderTab(button.dataset.tab))); renderTab('appearance');
 }
 
-function applyWallpaper(wallpaper) { const desktop = document.getElementById('desktop-env'); if (!desktop) return; desktop.style.backgroundImage = wallpaper === 'purple' ? 'radial-gradient(circle at 50% 30%, #581c87 0%, #0f0728 80%)' : wallpaper === 'midnight' ? 'radial-gradient(circle at 50% 30%, #3b0764 0%, #030108 80%)' : 'radial-gradient(circle at 50% 30%, #1e1035 0%, #080410 80%)'; }
+export function applyWallpaper(wallpaper) {
+    const desktop = document.getElementById('desktop-env');
+    if (!desktop) return;
+    if (wallpaper === 'custom') {
+        const custom = Storage.get('customWallpaper', null);
+        if (custom) { desktop.style.backgroundImage = `url("${custom}")`; return; }
+        wallpaper = 'default';
+    }
+    desktop.style.backgroundImage = WALLPAPERS[wallpaper] || WALLPAPERS.default;
+}
 function exportData() { const blob = new Blob([JSON.stringify(createBackup(), null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'nova-os-backup.json'; document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(url); showNotification('Settings', 'Local backup exported.'); }
 function importData(input) { const file = input?.files?.[0]; if (!file) { showNotification('Settings', 'Choose a backup JSON file first.'); return; } const reader = new FileReader(); reader.onerror = () => showNotification('Settings', 'NovaOS could not read that file.'); reader.onload = () => { let candidate; try { candidate = JSON.parse(String(reader.result)); } catch (_) { showNotification('Settings', 'That file is not valid JSON.'); return; } const validation = validateBackup(candidate); if (!validation.valid) { showNotification('Settings', validation.error); return; } if (!confirm('Replace the included NovaOS data with this backup?')) return; const restored = restoreBackup(candidate); if (!restored.valid) { showNotification('Settings', restored.error); return; } showNotification('Settings', 'Backup imported. Reloading NovaOS…'); setTimeout(() => location.reload(), 350); }; reader.readAsText(file); }

@@ -1,7 +1,7 @@
 /* NovaOS Context Menu Module */
 
 import { showNotification } from './notifications.js';
-import { launchApp } from './start-menu.js';
+import { launchApp } from './start-menu.js?v=7';
 
 export function initContextMenu() {
     const desktopEnv = document.getElementById('desktop-env');

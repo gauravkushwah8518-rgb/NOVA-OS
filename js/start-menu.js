@@ -1,19 +1,19 @@
 /* NovaOS Start Menu Module */
 
-import { openAppWindow } from './window-manager.js';
-import { renderFileManager } from './apps/file-manager.js';
-import { renderNotesApp } from './apps/notes.js';
-import { renderCalculator } from './apps/calculator.js';
-import { renderTerminal } from './apps/terminal.js';
-import { renderPaintApp } from './apps/paint.js';
-import { renderSettingsApp } from './apps/settings.js';
-import { renderClockApp } from './apps/clock.js';
-import { renderAboutApp } from './apps/about.js?v=5';
-import { renderMusicPlayer } from './apps/music-player.js';
-import { renderCalendarApp } from './apps/calendar.js';
-import { renderWeatherApp } from './apps/weather.js';
-import { showNotification } from './notifications.js';
-import { lockNovaOS } from './lock-screen.js';
+import { openAppWindow } from './window-manager.js?v=7';
+import { renderFileManager } from './apps/file-manager.js?v=7';
+import { renderNotesApp } from './apps/notes.js?v=7';
+import { renderCalculator } from './apps/calculator.js?v=7';
+import { renderTerminal } from './apps/terminal.js?v=7';
+import { renderPaintApp } from './apps/paint.js?v=7';
+import { renderSettingsApp } from './apps/settings.js?v=7';
+import { renderClockApp } from './apps/clock.js?v=7';
+import { renderAboutApp } from './apps/about.js?v=7';
+import { renderMusicPlayer } from './apps/music-player.js?v=7';
+import { renderCalendarApp } from './apps/calendar.js?v=7';
+import { renderWeatherApp } from './apps/weather.js?v=7';
+import { showNotification } from './notifications.js?v=7';
+import { lockNovaOS } from './lock-screen.js?v=7';
 
 export const APPS_CONFIG = [
     { id: 'files', title: 'Files', icon: '📁', render: renderFileManager },
