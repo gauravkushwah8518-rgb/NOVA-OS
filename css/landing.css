@@ -103,7 +103,6 @@
 .nav-logo-icon {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #a855f7, #7c3aed);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -118,6 +117,14 @@
 .nav-logo-icon:hover {
     box-shadow: 0 0 25px rgba(168, 85, 247, 0.9);
     transform: scale(1.08);
+}
+
+.nav-logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 9px;
 }
 
 .nav-title {
@@ -862,6 +869,10 @@
 }
 
 .boot-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     font-size: 2.5rem;
     font-weight: 900;
     color: #fff;
@@ -869,6 +880,14 @@
     margin-bottom: 24px;
     text-shadow: 0 0 20px #a855f7, 0 0 40px rgba(168, 85, 247, 0.5);
     text-align: center;
+}
+
+.boot-logo-img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 22px;
+    filter: drop-shadow(0 0 24px rgba(147, 51, 234, 0.55));
 }
 
 .boot-log {

@@ -3,7 +3,7 @@
 export function renderAboutApp(container) {
     container.innerHTML = `
         <div class="about-container">
-            <div class="about-logo">N</div>
+            <div class="about-logo"><img src="public/assets/novaos-logo.png?v=5" alt="NovaOS logo" /></div>
             <h2 style="font-size: 1.5rem; font-weight: 800;">NovaOS</h2>
             <p style="font-size: 0.95rem; color: var(--text-muted);">Your OS. Reimagined.</p>
             <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 10px;">

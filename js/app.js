@@ -3,7 +3,7 @@
 import { initLanding } from './landing.js';
 import { initDesktop } from './desktop.js';
 import { initTaskbar } from './taskbar.js';
-import { initStartMenu, launchApp } from './start-menu.js';
+import { initStartMenu, launchApp } from './start-menu.js?v=5';
 import { closeAllWindows } from './window-manager.js';
 import { showNotification } from './notifications.js';
 import { Storage } from './storage.js';

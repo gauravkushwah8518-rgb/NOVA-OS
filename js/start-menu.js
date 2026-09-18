@@ -8,7 +8,7 @@ import { renderTerminal } from './apps/terminal.js';
 import { renderPaintApp } from './apps/paint.js';
 import { renderSettingsApp } from './apps/settings.js';
 import { renderClockApp } from './apps/clock.js';
-import { renderAboutApp } from './apps/about.js';
+import { renderAboutApp } from './apps/about.js?v=5';
 import { renderMusicPlayer } from './apps/music-player.js';
 import { renderCalendarApp } from './apps/calendar.js';
 import { renderWeatherApp } from './apps/weather.js';

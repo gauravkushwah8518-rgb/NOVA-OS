@@ -27,9 +27,10 @@
 .taskbar-start-btn {
     width: 38px;
     height: 38px;
-    background: linear-gradient(135deg, #a855f7, #7c3aed);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(15, 10, 35, 0.7);
+    border: 1px solid rgba(168, 85, 247, 0.4);
     border-radius: 10px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,6 +43,14 @@
 .taskbar-start-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 25px rgba(168, 85, 247, 0.9);
+}
+
+.taskbar-start-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    display: block;
 }
 
 .taskbar-search-trigger {
