@@ -1,6 +1,6 @@
 /* NovaOS File Manager — a single local simulated filesystem with text editing. */
-import { Storage } from '../storage.js';
-import { showNotification } from '../notifications.js';
+import { Storage } from '../storage.js?v=7';
+import { showNotification } from '../notifications.js?v=7';
 
 const DEFAULT_FILES = [
     { id: '1', name: 'Documents', type: 'folder', items: [{ id: '1-1', name: 'Welcome.txt', type: 'file', content: 'Welcome to NovaOS virtual file manager! All files are saved locally.' }, { id: '1-2', name: 'Project_Roadmap.txt', type: 'file', content: '- Build futuristic UI\n- Add interactive apps\n- Optimize performance' }] },

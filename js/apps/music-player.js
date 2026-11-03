@@ -1,5 +1,5 @@
 /* Native-looking demo player. No audio source is requested when demo assets are absent. */
-import { Storage } from '../storage.js';
+import { Storage } from '../storage.js?v=7';
 
 const TRACKS = [
     { title: 'Neon Horizons', artist: 'Nova Ensemble', duration: 224, color: 'linear-gradient(135deg,#7c3aed,#ec4899)' },

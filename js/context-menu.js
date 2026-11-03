@@ -1,6 +1,6 @@
 /* NovaOS Context Menu Module */
 
-import { showNotification } from './notifications.js';
+import { showNotification } from './notifications.js?v=7';
 import { launchApp } from './start-menu.js?v=7';
 
 export function initContextMenu() {

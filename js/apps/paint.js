@@ -1,6 +1,6 @@
 /* NovaOS Paint App */
 
-import { showNotification } from '../notifications.js';
+import { showNotification } from '../notifications.js?v=7';
 
 export function renderPaintApp(container) {
     container.innerHTML = `

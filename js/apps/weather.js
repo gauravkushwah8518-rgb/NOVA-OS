@@ -1,5 +1,5 @@
 /* Simulated weather only — no network access or external service. */
-import { Storage } from '../storage.js';
+import { Storage } from '../storage.js?v=7';
 
 const WEATHER = {
     Bhopal: { temp: 29, feels: 31, condition: 'Sunny', icon: '☀️', humidity: '41%', wind: '12 km/h', high: 32, low: 22 },

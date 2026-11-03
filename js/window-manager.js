@@ -1,5 +1,5 @@
 /* NovaOS central window manager: focus, drag, resize, snap, and workspace visibility. */
-import { getCurrentWorkspace, switchWorkspace } from './workspaces.js';
+import { getCurrentWorkspace, switchWorkspace } from './workspaces.js?v=7';
 
 let highestZIndex = 100;
 const openWindows = new Map();

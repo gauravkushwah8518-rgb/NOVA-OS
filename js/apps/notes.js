@@ -1,7 +1,7 @@
 /* NovaOS Notes App */
 
-import { Storage } from '../storage.js';
-import { showNotification } from '../notifications.js';
+import { Storage } from '../storage.js?v=7';
+import { showNotification } from '../notifications.js?v=7';
 
 const NOTE_COLORS = [
     { name: 'Default', value: 'transparent' },

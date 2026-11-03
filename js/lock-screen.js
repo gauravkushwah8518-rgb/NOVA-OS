@@ -1,5 +1,5 @@
 /* UI-only lock screen. This is not operating-system security. */
-import { Storage } from './storage.js';
+import { Storage } from './storage.js?v=7';
 
 const DEFAULT = { pin: '1234' };
 function config() { const saved = Storage.get('lockConfig', DEFAULT); return saved && typeof saved.pin === 'string' && /^\d{4,12}$/.test(saved.pin) ? saved : { ...DEFAULT }; }

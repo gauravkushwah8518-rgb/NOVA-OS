@@ -1,6 +1,6 @@
 /* Local-only calendar with a compact event store. */
-import { Storage } from '../storage.js';
-import { showNotification } from '../notifications.js';
+import { Storage } from '../storage.js?v=7';
+import { showNotification } from '../notifications.js?v=7';
 
 const pad = value => String(value).padStart(2, '0');
 const keyFor = date => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;

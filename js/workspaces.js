@@ -1,5 +1,5 @@
 /* NovaOS virtual workspaces: a small shared state layer for the window manager. */
-import { Storage } from './storage.js';
+import { Storage } from './storage.js?v=7';
 
 const DEFAULT_STATE = { current: 1, workspaces: [1, 2, 3, 4] };
 let state = DEFAULT_STATE;

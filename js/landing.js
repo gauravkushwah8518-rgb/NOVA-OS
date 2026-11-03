@@ -1,6 +1,6 @@
 /* NovaOS Landing Page Interactions, Particles, 3D Tilt & Boot */
 
-import { showNotification } from './notifications.js';
+import { showNotification } from './notifications.js?v=7';
 
 export function initLanding(onBootComplete) {
     // 1. Custom Cursor with particle trail
