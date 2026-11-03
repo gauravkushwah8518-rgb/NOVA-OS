@@ -86,3 +86,26 @@ function getHighestFocusedWindow() { return [...document.querySelectorAll('.os-w
 function updateWorkspaceVisibility() { const current = getCurrentWorkspace(); openWindows.forEach(record => { const visible = record.workspace === current; record.windowEl.classList.toggle('workspace-hidden', !visible); record.taskbarIcon?.classList.toggle('workspace-hidden', !visible); }); }
 document.addEventListener('novaos:workspace-change', updateWorkspaceVisibility);
 export function closeAllWindows() { openWindows.forEach(record => { record.windowEl.remove(); record.taskbarIcon?.remove(); }); openWindows.clear(); }
+
+export function focusNextWindow() {
+    const currentWorkspace = getCurrentWorkspace();
+    const visible = [];
+    openWindows.forEach(record => { if (record.workspace === currentWorkspace && !record.windowEl.classList.contains('minimized') && !record.windowEl.classList.contains('workspace-hidden')) visible.push(record); });
+    if (visible.length < 2) return false;
+    const sorted = visible.slice().sort((a, b) => Number(a.windowEl.style.zIndex || 0) - Number(b.windowEl.style.zIndex || 0));
+    bringWindowToFront(sorted[0].windowEl);
+    return true;
+}
+
+export function toggleShowDesktop() {
+    const currentWorkspace = getCurrentWorkspace();
+    const records = [];
+    openWindows.forEach(record => { if (record.workspace === currentWorkspace) records.push(record); });
+    if (records.length === 0) return false;
+    const anyVisible = records.some(record => !record.windowEl.classList.contains('minimized'));
+    records.forEach(record => {
+        const minimized = record.windowEl.classList.toggle('minimized', anyVisible);
+        record.taskbarIcon?.classList.toggle('active', !minimized);
+    });
+    return true;
+}

@@ -9,9 +9,11 @@ import { showNotification } from './notifications.js?v=7';
 import { Storage } from './storage.js?v=7';
 import { initWorkspaces } from './workspaces.js?v=7';
 import { initLockScreen } from './lock-screen.js?v=7';
+import { initShortcuts } from './shortcuts.js?v=7';
 import { applyWallpaper } from './apps/settings.js?v=7';
 
 document.addEventListener('DOMContentLoaded', () => {
+    initShortcuts();
     const landingPage = document.getElementById('landing-page');
     const desktopEnv = document.getElementById('desktop-env');
 
